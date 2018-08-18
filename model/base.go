@@ -20,7 +20,7 @@ func SetEngine() *xorm.Engine {
 	orm, err = xorm.NewEngine("mysql", username+":"+password+"@tcp("+server+":3306)/"+dbName+"?charset=utf8")
 	PanicIf(err)
 	orm.TZLocation = time.Local
-	orm.ShowSQL = Cfg.MustBool("db", "show_sql", false)
+	orm.ShowSQL(Cfg.MustBool("db", "show_sql", false))
 	orm.Logger = xorm.NewSimpleLogger(Log.GetWriter())
 	return orm
 }
